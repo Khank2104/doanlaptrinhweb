@@ -1,0 +1,79 @@
+﻿@page
+@model SmartGym.Pages.DashboardModel
+@using Microsoft.AspNetCore.Identity
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Dashboard";
+    var user = Model.UserProfile;
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (user != null)
+{
+    <div class="container mt-5">
+        <h2 class="mb-4">Chào mừng, <strong>@user.FullName</strong> 👋</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Chỉ số BMI</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.BMI.ToString("0.00")</h5>
+                        <p class="card-text">Tình trạng: <strong>@Model.BMICategory</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Lượng nước</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@user.WaterIntake L</h5>
+                        <p class="card-text">Trong ngày</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Giấc ngủ</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@user.SleepHours giờ</h5>
+                        <p class="card-text">Ghi nhận gần nhất</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="card text-white bg-secondary">
+                    <div class="card-header">Mục tiêu của bạn</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.Goal</h5>
+                    </div>
+                </div>
+
+                <div class="alert alert-primary mt-3" role="alert">
+                    <strong>Gợi ý cá nhân hóa:</strong> @Model.Recommendation
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a asp-page="/EditProfile" class="btn btn-primary">Cập nhật dữ liệu sức khỏe</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger mt-5">Không thể tải thông tin người dùng.</div>
+}
