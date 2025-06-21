@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SmartGym.Data;
 using SmartGym.Models;
+using System;
 
 namespace SmartGym.Pages
 {
@@ -26,6 +27,9 @@ namespace SmartGym.Pages
         public string BMICategory { get; private set; } = string.Empty;
         public string Recommendation { get; private set; } = string.Empty;
         public string Goal { get; private set; } = string.Empty;
+
+        public double TotalWaterToday { get; private set; }  // ✅ thêm biến tổng lượng nước
+        public double TotalSleepToday { get; private set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -55,7 +59,20 @@ namespace SmartGym.Pages
                 Goal = "Chưa thiết lập";
             }
 
-            // Gán BMICategory và Recommendation từ BMI
+            // ✅ Tính lượng nước uống trong ngày hôm nay
+            var today = DateTime.Today;
+            TotalWaterToday = await _context.WaterIntakes
+                .Where(w => w.UserId == userId && w.LogDate.Date == today)
+                .SumAsync(w => w.AmountInLiters);
+
+            // ✅ Tính tổng thời lượng ngủ hôm nay (SleepEnd phải nằm trong hôm nay)
+            var sleepLogsToday = await _context.SleepLogs
+                .Where(s => s.UserId == userId && s.SleepEnd.Date == today)
+                .ToListAsync();
+
+            TotalSleepToday = sleepLogsToday.Sum(s => (s.SleepEnd - s.SleepStart).TotalHours);
+
+            // ✅ Phân loại BMI
             if (BMI < 18.5)
             {
                 BMICategory = "Gầy";

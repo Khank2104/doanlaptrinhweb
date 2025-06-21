@@ -18,6 +18,10 @@ namespace SmartGym.Data
         public DbSet<SleepLog> SleepLogs { get; set; } = default!;
         public DbSet<WaterIntake> WaterIntakes { get; set; } = default!;
         public DbSet<UserFitnessProfile> UserFitnessProfiles { get; set; }
+        public DbSet<ExerciseSuggestion> ExerciseSuggestions { get; set; } = default!;
+        public DbSet<SavedExerciseSuggestion> SavedExerciseSuggestions { get; set; }
+
+
 
     }
 }
