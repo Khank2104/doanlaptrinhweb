@@ -17,6 +17,7 @@ namespace SmartGym.Models
         public required string ActivityType { get; set; }
 
         public int DurationMinutes { get; set; }
+        public double CaloriesBurned { get; set; }
         public DateTime ActivityDate { get; set; } = DateTime.Now;
     }
 }

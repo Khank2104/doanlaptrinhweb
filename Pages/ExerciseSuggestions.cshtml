@@ -1,0 +1,68 @@
+﻿@page
+@model SmartGym.Pages.ExerciseSuggestionsModel
+@{
+    ViewData["Title"] = "Gợi Ý Bài Tập";
+}
+
+<h2 class="text-center mb-4">🎯 Gợi Ý Bài Tập Cá Nhân Hoá</h2>
+
+<!-- Form chọn level -->
+<form method="post" class="row g-3 mb-5">
+    <div class="col-md-4">
+        <label class="form-label fw-bold">🎯 Mục tiêu</label>
+        <input class="form-control" asp-for="Goal" readonly />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label fw-bold">📊 BMI</label>
+        <input class="form-control" asp-for="BMI" readonly />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label fw-bold">📌 Trình độ</label>
+        <select class="form-select" asp-for="Level">
+            <option value="người mới">Người mới</option>
+            <option value="trung cấp">Trung cấp</option>
+            <option value="nâng cao">Nâng cao</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100">🔍 Xem Gợi Ý</button>
+    </div>
+</form>
+
+<!-- Hiển thị gợi ý -->
+@if (Model.Suggestions != null && Model.Suggestions.Any())
+{
+    <div class="row">
+        @foreach (var ex in Model.Suggestions)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-success">
+                    <div class="card-body">
+                        <h5 class="card-title">@ex.Name</h5>
+                        <p><strong>Mục tiêu:</strong> @ex.Goal</p>
+                        <p><strong>Trình độ:</strong> @ex.Level</p>
+                        <p><strong>⏱️ Thời gian:</strong> @ex.Duration phút</p>
+                        <p><strong>🔥 Calories:</strong> @ex.CaloriesBurned kcal</p>
+
+                        <!-- Nút lưu -->
+                        <form method="post" asp-page-handler="Save"
+                              asp-route-name="@ex.Name"
+                              asp-route-goal="@ex.Goal"
+                              asp-route-level="@ex.Level"
+                              asp-route-duration="@ex.Duration"
+                              asp-route-calories="@ex.CaloriesBurned">
+                            <button type="submit" class="btn btn-outline-success w-100 mt-2">💾 Lưu bài tập này</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (Model.IsPost)
+{
+    <div class="alert alert-warning text-center">❌ Không có bài tập phù hợp!</div>
+}
+
+<!-- Quay lại -->
+<a asp-page="/TrackWorkout" class="btn btn-secondary mt-4">⬅️ Quay lại Trang Hoạt Động</a>

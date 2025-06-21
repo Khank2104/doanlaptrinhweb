@@ -270,6 +270,7 @@ C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\SmartGym.MvcApplicationPartsAsse
 C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\SmartGym.MvcApplicationPartsAssemblyInfo.cache
 C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\SmartGym.RazorAssemblyInfo.cache
 C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\SmartGym.RazorAssemblyInfo.cs
+C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\SmartGym.sourcelink.json
 C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\scopedcss\bundle\SmartGym.styles.css
 C:\baitapgit\SmartGym\SmartGym\obj\Debug\net8.0\scopedcss\projectbundle\SmartGym.bundle.scp.css

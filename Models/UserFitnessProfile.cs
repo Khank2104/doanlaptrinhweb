@@ -17,7 +17,7 @@ namespace SmartGym.Models
         public double BMI { get; set; }
 
         [Required]
-        public string Goal { get; set; } = "Giữ dáng"; // Hoặc: Giảm cân / Tăng cơ / Sức bền
+        public string Goal { get; set; } = "Giữ dáng"; // Hoặc: Giảm cân / Tăng cơ
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }

@@ -22,6 +22,7 @@
         <h2 class="mb-4">Chào mừng, <strong>@user.FullName</strong> 👋</h2>
 
         <div class="row">
+            <!-- Card BMI -->
             <div class="col-md-4">
                 <div class="card text-white bg-info mb-3">
                     <div class="card-header">Chỉ số BMI</div>
@@ -32,27 +33,36 @@
                 </div>
             </div>
 
+            <!-- Card Nước uống -->
             <div class="col-md-4">
                 <div class="card text-white bg-success mb-3">
-                    <div class="card-header">Lượng nước</div>
+                    <div class="card-header">Lượng nước hôm nay</div>
                     <div class="card-body">
-                        <h5 class="card-title">@user.WaterIntake L</h5>
-                        <p class="card-text">Trong ngày</p>
+                        <h5 class="card-title">@Model.TotalWaterToday.ToString("0.00") L</h5>
+                        <p class="card-text">Tính đến hiện tại</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Card Giấc ngủ -->
             <div class="col-md-4">
                 <div class="card text-white bg-warning mb-3">
-                    <div class="card-header">Giấc ngủ</div>
+                    <div class="card-header">Giấc ngủ hôm nay</div>
                     <div class="card-body">
-                        <h5 class="card-title">@user.SleepHours giờ</h5>
-                        <p class="card-text">Ghi nhận gần nhất</p>
+                        @{
+                            var totalSleep = TimeSpan.FromHours(Model.TotalSleepToday);
+                            var hours = (int)totalSleep.TotalHours;
+                            var minutes = totalSleep.Minutes;
+                            var formattedSleep = $"{hours} giờ {minutes} phút";
+                        }
+                        <h5 class="card-title">🛌 @formattedSleep</h5>
+                        <p class="card-text">@DateTime.Today.ToString("dd/MM/yyyy")</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Mục tiêu & Gợi ý -->
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="card text-white bg-secondary">
@@ -69,7 +79,19 @@
         </div>
 
         <div class="mt-4">
-            <a asp-page="/EditProfile" class="btn btn-primary">Cập nhật dữ liệu sức khỏe</a>
+            <a asp-page="/EditProfile" class="btn btn-primary">
+                📝 Cập nhật dữ liệu sức khỏe
+            </a>
+            <a asp-page="/TrackWater" class="btn btn-outline-info">
+                💧 Thêm lượng nước
+            </a>
+            <a asp-page="/TrackSleep" class="btn btn-outline-info">
+                😴 Thêm giấc ngủ
+            </a>
+            <a asp-page="/TrackWorkout" class="btn btn-outline-warning">
+                🏃 Ghi nhận hoạt động
+            </a>
+
         </div>
     </div>
 }

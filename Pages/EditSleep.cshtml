@@ -1,0 +1,30 @@
+﻿@page "{id:int}"
+@model SmartGym.Pages.EditSleepModel
+@{
+    ViewData["Title"] = "Chỉnh sửa giấc ngủ";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">@ViewData["Title"] 😴</h2>
+
+    <form method="post" class="card shadow p-4 bg-white">
+        <div class="mb-3">
+            <label asp-for="Input.SleepStart" class="form-label fw-bold">🕘 Giờ đi ngủ:</label>
+            <input asp-for="Input.SleepStart" class="form-control" type="datetime-local" />
+            <span asp-validation-for="Input.SleepStart" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.SleepEnd" class="form-label fw-bold">🕗 Giờ thức dậy:</label>
+            <input asp-for="Input.SleepEnd" class="form-control" type="datetime-local" />
+            <span asp-validation-for="Input.SleepEnd" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">💾 Lưu thay đổi</button>
+        <a asp-page="/TrackSleep" class="btn btn-outline-secondary w-100 mt-2">⬅️ Quay lại</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
