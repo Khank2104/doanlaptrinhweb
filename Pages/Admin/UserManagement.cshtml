@@ -1,0 +1,52 @@
+﻿@page
+@model SmartGym.Pages.Admin.UserManagementModel
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">👥 @ViewData["Title"]</h2>
+
+    <table class="table table-bordered text-center align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                var roles = Model.UserRoles[user.Id];
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        @if (roles.Any())
+                        {
+                            <span class="badge bg-success">@string.Join(", ", roles)</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Không có</span>
+                        }
+                    </td>
+                    <td>
+                        @if (roles.Contains("Admin"))
+                        {
+                            <form method="post" asp-page-handler="RevokeAdmin" asp-route-id="@user.Id" class="d-inline">
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Thu hồi quyền Admin?')">🔒 Thu hồi Admin</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="GrantAdmin" asp-route-id="@user.Id" class="d-inline">
+                                <button class="btn btn-sm btn-success">🔑 Gán quyền Admin</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

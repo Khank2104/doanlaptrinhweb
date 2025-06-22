@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartGym")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b086db385dcd658d852f1401a48dd06a0d76520")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b7d3866f2b868f9ca10675ed17f1e52cd456269")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartGym")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartGym")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
