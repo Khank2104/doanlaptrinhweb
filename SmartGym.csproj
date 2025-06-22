@@ -31,4 +31,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+  </ItemGroup>
+
 </Project>

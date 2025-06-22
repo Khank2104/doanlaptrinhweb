@@ -1,0 +1,51 @@
+﻿@page
+@model SmartGym.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Bảng điều khiển Admin";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-danger mb-4">⚙️ @ViewData["Title"]</h2>
+
+    <div class="alert alert-success text-center">
+        👑 @Model.Message
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">📊 Thống kê</h5>
+                    <p class="card-text">Thêm các biểu đồ ở đây nếu cần</p>
+                    <a href="/TrackNutrition" class="btn btn-outline-primary">Xem Dinh Dưỡng</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">👥 Quản lý người dùng</h5>
+                    <p class="card-text">(Tùy chọn) Xem danh sách user hoặc phân quyền</p>
+                    <a href="/Admin/UserManagement" class="btn btn-outline-dark mt-2">👥 Quản lý người dùng</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">👤 Tổng số người dùng</h5>
+                    <h2 class="text-primary">@Model.TotalUsers</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">🍱 Tổng số bữa ăn đã ghi nhận</h5>
+                    <h2 class="text-success">@Model.TotalMealsLogged</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
