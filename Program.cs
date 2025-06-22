@@ -26,7 +26,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
     DataSeeder.SeedExercises(context); // ✅ Gọi hàm seed
+    MealDataSeeder.Seed(context);
 }
+
 
 // 4. Middleware xử lý request
 if (!app.Environment.IsDevelopment())

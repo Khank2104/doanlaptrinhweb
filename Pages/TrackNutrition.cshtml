@@ -1,0 +1,180 @@
+﻿@page
+@model SmartGym.Pages.TrackNutritionModel
+@{
+    ViewData["Title"] = "Theo dõi dinh dưỡng";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-success">🥗 @ViewData["Title"]</h2>
+    <div class="mb-3 text-end">
+        <a asp-page="/SuggestMeals" class="btn btn-outline-success">
+            ➕ Tạo gợi ý bữa ăn
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- 💾 Gợi Ý Bữa Ăn Đã Lưu -->
+    @if (Model.SavedSuggestions != null && Model.SavedSuggestions.Any())
+    {
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-success text-white">💾 Bữa Ăn Gợi Ý Đã Lưu</div>
+            <div class="card-body p-0">
+                <table class="table table-bordered mb-0 text-center align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Món ăn</th>
+                            <th>Loại bữa</th>
+                            <th>Calo</th>
+                            <th>Protein</th>
+                            <th>Carbs</th>
+                            <th>Fat</th>
+                            <th>⚡ Ghi nhận</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SavedSuggestions)
+                        {
+                            <tr>
+                                <td>@item.FoodName</td>
+                                <td>@item.MealType</td>
+                                <td>@item.Calories kcal</td>
+                                <td>@item.Protein g</td>
+                                <td>@item.Carbs g</td>
+                                <td>@item.Fat g</td>
+                                <td>
+                                    <form method="post" asp-page-handler="QuickLog" asp-antiforgery="true" class="d-inline">
+                                        <input type="hidden" name="FoodName" value="@item.FoodName" />
+                                        <input type="hidden" name="MealType" value="@item.MealType" />
+                                        <input type="hidden" name="Calories" value="@item.Calories" />
+                                        <input type="hidden" name="Protein" value="@item.Protein" />
+                                        <input type="hidden" name="Carbs" value="@item.Carbs" />
+                                        <input type="hidden" name="Fat" value="@item.Fat" />
+                                        <button type="submit" class="btn btn-sm btn-primary">📌 Ghi nhận</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <!-- Tổng dinh dưỡng hôm nay -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="mb-3 fw-bold">📊 Tổng hôm nay - @DateTime.Today.ToString("dd/MM/yyyy")</h5>
+            <div class="row text-center fw-bold">
+                <div class="col text-danger">🔥 Calo: @Model.TotalCalories kcal</div>
+                <div class="col text-primary">🍗 Protein: @Model.TotalProtein g</div>
+                <div class="col text-success">🍚 Carbs: @Model.TotalCarbs g</div>
+                <div class="col text-warning">🥑 Fat: @Model.TotalFat g</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form ghi nhận bữa ăn -->
+    <form method="post" class="card shadow-sm p-4 mb-4">
+        <div class="mb-3">
+            <label asp-for="Input.MealType" class="form-label">🍽️ Loại bữa</label>
+            <select asp-for="Input.MealType" class="form-control">
+                <option>Sáng</option>
+                <option>Trưa</option>
+                <option>Tối</option>
+                <option>Phụ</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.FoodName" class="form-label">🍛 Tên món ăn</label>
+            <input asp-for="Input.FoodName" class="form-control" />
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Input.Calories" class="form-label">🔥 Calo</label>
+                <input asp-for="Input.Calories" class="form-control" type="number" min="0" />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label asp-for="Input.LogDate" class="form-label">📅 Ngày</label>
+                <input asp-for="Input.LogDate" class="form-control" type="date" />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label asp-for="Input.LogTime" class="form-label">⏰ Giờ ăn</label>
+                <input asp-for="Input.LogTime" class="form-control" type="time" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="Input.Protein" class="form-label">🍗 Protein (g)</label>
+                <input asp-for="Input.Protein" class="form-control" type="number" step="0.1" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Input.Carbs" class="form-label">🍚 Carbs (g)</label>
+                <input asp-for="Input.Carbs" class="form-control" type="number" step="0.1" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Input.Fat" class="form-label">🥑 Fat (g)</label>
+                <input asp-for="Input.Fat" class="form-control" type="number" step="0.1" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">💾 Ghi nhận</button>
+    </form>
+
+    <!-- Lịch sử hôm nay -->
+    @if (Model.TodayMeals.Any())
+    {
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">📋 Danh sách món hôm nay</div>
+            <div class="card-body p-0">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Loại bữa</th>
+                            <th>Món ăn</th>
+                            <th>Calo</th>
+                            <th>Protein</th>
+                            <th>Carbs</th>
+                            <th>Fat</th>
+                            <th>Ghi lúc</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var log in Model.TodayMeals)
+                        {
+                            <tr>
+                                <td>@log.MealType</td>
+                                <td>@log.FoodName</td>
+                                <td>@log.Calories kcal</td>
+                                <td>@log.Protein g</td>
+                                <td>@log.Carbs g</td>
+                                <td>@log.Fat g</td>
+                                <td>@log.LogTime.ToString(@"hh\:mm")</td>
+                                <td>
+                                    <a asp-page="/EditNutrition" asp-route-id="@log.Id" class="btn btn-sm btn-warning">✏️ Sửa</a>
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@log.Id" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">🗑️ Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4 text-center">📭 Chưa có món ăn nào hôm nay</div>
+    }
+</div>
