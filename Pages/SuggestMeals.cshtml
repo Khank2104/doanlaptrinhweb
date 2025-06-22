@@ -1,0 +1,58 @@
+﻿@page
+@model SmartGym.Pages.SuggestMealsModel
+@{
+    ViewData["Title"] = "Gợi Ý Bữa Ăn";
+}
+
+<h2 class="text-center mb-4">🍽️ Gợi Ý Bữa Ăn Cá Nhân Hoá</h2>
+
+<!-- Form chọn trình độ ăn -->
+<form method="post" class="row g-3 mb-5">
+    <div class="col-md-4">
+        <label class="form-label fw-bold">🎯 Mục tiêu</label>
+        <input class="form-control" asp-for="Goal" readonly />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label fw-bold">📊 BMI</label>
+        <input class="form-control" asp-for="BMI" readonly />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-success w-100">🔍 Xem Gợi Ý</button>
+    </div>
+</form>
+
+@if (Model.Suggestions != null && Model.Suggestions.Any())
+{
+    <div class="row">
+        @foreach (var meal in Model.Suggestions)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-success">
+                    <div class="card-body">
+                        <h5 class="card-title">@meal.MealName</h5>
+                        <p><strong>Mục tiêu:</strong> @meal.GoalType</p>
+                        <p><strong>🔥 Calories:</strong> @meal.Calories kcal</p>
+                        <p><strong>🍗 Protein:</strong> @meal.Protein g</p>
+                        <p><strong>🍚 Carbs:</strong> @meal.Carbs g</p>
+                        <p><strong>🥑 Fat:</strong> @meal.Fat g</p>
+
+                        <!-- Nút lưu -->
+                        <form method="post" asp-page-handler="Save"
+                              asp-route-mealName="@meal.MealName"
+                              asp-route-goal="@meal.GoalType"
+                              asp-route-calories="@meal.Calories"
+                              asp-route-protein="@meal.Protein"
+                              asp-route-carbs="@meal.Carbs"
+                              asp-route-fat="@meal.Fat">
+                            <button type="submit" class="btn btn-outline-success w-100 mt-2">💾 Lưu bữa ăn này</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (Model.IsPost)
+{
+    <div class="alert alert-warning text-center">❌ Không có bữa ăn phù hợp!</div>
+}

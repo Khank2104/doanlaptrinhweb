@@ -60,6 +60,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/baitapgit/SmartGym/SmartGym/Pages/EditNutrition.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdE51dHJpdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/baitapgit/SmartGym/SmartGym/Pages/EditProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFByb2ZpbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,6 +90,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/baitapgit/SmartGym/SmartGym/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/baitapgit/SmartGym/SmartGym/Pages/SuggestMeals.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3VnZ2VzdE1lYWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/baitapgit/SmartGym/SmartGym/Pages/TrackNutrition.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhY2tOdXRyaXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/baitapgit/SmartGym/SmartGym/Pages/TrackSleep.cshtml]

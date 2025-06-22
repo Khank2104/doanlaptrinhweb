@@ -20,6 +20,9 @@ namespace SmartGym.Data
         public DbSet<UserFitnessProfile> UserFitnessProfiles { get; set; }
         public DbSet<ExerciseSuggestion> ExerciseSuggestions { get; set; } = default!;
         public DbSet<SavedExerciseSuggestion> SavedExerciseSuggestions { get; set; }
+        public DbSet<MealSuggestion> MealSuggestions { get; set; } = default!;
+        public DbSet<SavedMealSuggestion> SavedMealSuggestions { get; set; }
+
 
 
 

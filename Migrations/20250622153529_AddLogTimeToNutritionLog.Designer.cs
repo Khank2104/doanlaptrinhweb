@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartGym.Data;
 
@@ -11,9 +12,11 @@ using SmartGym.Data;
 namespace SmartGym.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250622153529_AddLogTimeToNutritionLog")]
+    partial class AddLogTimeToNutritionLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,45 +318,6 @@ namespace SmartGym.Migrations
                     b.ToTable("HealthHistories");
                 });
 
-            modelBuilder.Entity("SmartGym.Models.MealSuggestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("BmiMax")
-                        .HasColumnType("float");
-
-                    b.Property<double>("BmiMin")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Calories")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Carbs")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Fat")
-                        .HasColumnType("real");
-
-                    b.Property<string>("GoalType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MealName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Protein")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MealSuggestions");
-                });
-
             modelBuilder.Entity("SmartGym.Models.NutritionLog", b =>
                 {
                     b.Property<int>("Id")
@@ -438,46 +402,6 @@ namespace SmartGym.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("SavedExerciseSuggestions");
-                });
-
-            modelBuilder.Entity("SmartGym.Models.SavedMealSuggestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Calories")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Carbs")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Fat")
-                        .HasColumnType("real");
-
-                    b.Property<string>("FoodName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MealType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Protein")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("SavedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SavedMealSuggestions");
                 });
 
             modelBuilder.Entity("SmartGym.Models.SleepLog", b =>
